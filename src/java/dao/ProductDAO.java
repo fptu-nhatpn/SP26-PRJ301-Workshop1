@@ -1,16 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import dto.Product;
 import javax.persistence.*;
 import java.util.List;
-/**
- *
- * @author nhatp
- */
+
 public class ProductDAO implements Accessible<Product> {
 
     private EntityManager em;
@@ -21,26 +14,45 @@ public class ProductDAO implements Accessible<Product> {
 
     @Override
     public int insertRec(Product obj) {
-        em.getTransaction().begin();
-        em.persist(obj);
-        em.getTransaction().commit();
-        return 1;
+        try {
+            em.getTransaction().begin();
+            em.persist(obj);
+            em.getTransaction().commit();
+            return 1;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
     public int updateRec(Product obj) {
-        em.getTransaction().begin();
-        em.merge(obj);
-        em.getTransaction().commit();
-        return 1;
+        try {
+            em.getTransaction().begin();
+            em.merge(obj);
+            em.getTransaction().commit();
+            return 1;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
     public int deleteRec(Product obj) {
-        em.getTransaction().begin();
-        em.remove(em.contains(obj) ? obj : em.merge(obj));
-        em.getTransaction().commit();
-        return 1;
+        try {
+            em.getTransaction().begin();
+            Product managed = em.contains(obj) ? obj : em.find(Product.class, obj.getProductId());
+            if (managed != null) em.remove(managed);
+            em.getTransaction().commit();
+            return 1;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
@@ -52,5 +64,12 @@ public class ProductDAO implements Accessible<Product> {
     public List<Product> listAll() {
         return em.createQuery("SELECT p FROM Product p", Product.class)
                  .getResultList();
+    }
+
+    public List<Product> listByCategory(int categoryId) {
+        return em.createQuery(
+                "SELECT p FROM Product p WHERE p.type.typeId = :cid", Product.class)
+                .setParameter("cid", categoryId)
+                .getResultList();
     }
 }

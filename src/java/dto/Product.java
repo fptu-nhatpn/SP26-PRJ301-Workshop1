@@ -118,12 +118,12 @@ public class Product implements Serializable {
         this.account = account;
     }
 
-    public Category getCategory() {
+    public Category getType() {
         return category;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setType(Category type) {
+        this.category = type;
     }
 
     public String getUnit() {

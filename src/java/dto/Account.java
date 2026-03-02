@@ -30,6 +30,8 @@ public class Account implements Serializable {
     private Date birthday;
 
     private String phone;
+    
+    private boolean gender;
 
     private boolean isUse;
 
@@ -38,12 +40,13 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(String account, String pass, String lastName, String firstName, Date birthday, String phone, boolean isUse, int roleInSystem) {
+    public Account(String account, String pass, String lastName, String firstName, Date birthday, boolean gender, String phone, boolean isUse, int roleInSystem) {
         this.account = account;
         this.pass = pass;
         this.lastName = lastName;
         this.firstName = firstName;
         this.birthday = birthday;
+        this.gender = gender;
         this.phone = phone;
         this.isUse = isUse;
         this.roleInSystem = roleInSystem;
@@ -88,6 +91,15 @@ public class Account implements Serializable {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+    
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+    
 
     public String getPhone() {
         return phone;

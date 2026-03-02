@@ -1,0 +1,18 @@
+package dto;
+
+import dto.Product;
+import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
+import javax.persistence.metamodel.SingularAttribute;
+import javax.persistence.metamodel.StaticMetamodel;
+
+@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2026-03-02T11:36:45")
+@StaticMetamodel(Category.class)
+public class Category_ { 
+
+    public static volatile SingularAttribute<Category, String> memo;
+    public static volatile SingularAttribute<Category, Integer> typeId;
+    public static volatile SingularAttribute<Category, String> categoryName;
+    public static volatile ListAttribute<Category, Product> products;
+
+}
