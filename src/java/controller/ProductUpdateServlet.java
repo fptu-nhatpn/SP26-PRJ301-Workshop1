@@ -36,7 +36,7 @@ public class ProductUpdateServlet extends HttpServlet {
     private EntityManagerFactory emf;
 
     // Folder inside the web app root where images are saved
-    private static final String IMAGE_DIR = "uploads/products";
+    private static final String IMAGE_DIR = "/images/sanPham";
 
     @Override
     public void init() throws ServletException {
@@ -82,17 +82,13 @@ public class ProductUpdateServlet extends HttpServlet {
         String productId   = request.getParameter("productId");
         String productName = request.getParameter("productName");
         String brief       = request.getParameter("brief");
-        String dateStr     = request.getParameter("postedDate");
         String typeIdStr   = request.getParameter("typeId");
         String accountId   = request.getParameter("accountId");
         String unit        = request.getParameter("unit");
         int    price       = Integer.parseInt(request.getParameter("price"));
         int    discount    = Integer.parseInt(request.getParameter("discount"));
 
-        Date postedDate = null;
-        try {
-            postedDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-        } catch (Exception e) { /* leave null */ }
+        Date postedDate = new Date(); 
 
         EntityManager em = emf.createEntityManager();
         try {

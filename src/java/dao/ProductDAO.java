@@ -68,7 +68,7 @@ public class ProductDAO implements Accessible<Product> {
 
     public List<Product> listByCategory(int categoryId) {
         return em.createQuery(
-                "SELECT p FROM Product p WHERE p.type.typeId = :cid", Product.class)
+                "SELECT p FROM Product p WHERE p.category.typeId = :cid", Product.class)
                 .setParameter("cid", categoryId)
                 .getResultList();
     }

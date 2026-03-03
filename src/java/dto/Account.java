@@ -26,7 +26,7 @@ public class Account implements Serializable {
     @Column(nullable = false)
     private String firstName;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date birthday;
 
     private String phone;
